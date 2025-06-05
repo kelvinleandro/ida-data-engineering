@@ -52,7 +52,7 @@ class ETLProcessor:
             pandas.DataFrame or None: DataFrame com dados brutos ou None em caso de erro.
         """
         try:
-            df = pd.read_excel(self.file_path, engine="odfpy", skiprows=self.skiprows)
+            df = pd.read_excel(self.file_path, engine="odf", skiprows=self.skiprows)
             df.dropna(how="all", inplace=True)
             logging.info(f"Dados extraídos com sucesso de: {self.file_path}")
             return df
