@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS anatel_datamart.FactIndicadorDesempenho (
     id_grupo_economico INTEGER NOT NULL,
     id_servico INTEGER NOT NULL,
     id_indicador INTEGER NOT NULL,
-    valor NUMERIC(15, 4) NOT NULL,
+    valor NUMERIC(15, 4),
 
     CONSTRAINT fk_tempo FOREIGN KEY (id_tempo) REFERENCES anatel_datamart.DimTempo(id_tempo) ON DELETE RESTRICT,
     CONSTRAINT fk_grupo_economico FOREIGN KEY (id_grupo_economico) REFERENCES anatel_datamart.DimGrupoEconomico(id_grupo_economico) ON DELETE RESTRICT,
