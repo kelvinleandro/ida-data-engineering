@@ -86,6 +86,22 @@ class ETLProcessor:
             inplace=True,
         )
 
+        df_raw["nome_grupo_economico"] = (
+            df_raw["nome_grupo_economico"].astype(str).str.strip()
+        )
+
+        # Remoção de notas de rodapé (ex: (*) ...)
+        df_raw = df_raw[
+            ~df_raw["nome_grupo_economico"].str.match(r"^\(\*+\)", na=False)
+        ].copy()
+
+        # Remoção de nomes que terminam com (*)
+        df_raw["nome_grupo_economico"] = (
+            df_raw["nome_grupo_economico"]
+            .str.replace(r"\s*\(\*+\)", "", regex=True)
+            .str.strip()
+        )
+
         id_vars = ["nome_grupo_economico", "nome_indicador"]
 
         actual_months_to_melt = [

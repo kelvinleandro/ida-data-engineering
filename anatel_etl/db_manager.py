@@ -66,7 +66,7 @@ class DBManager:
         Returns:
             int: O ID da entrada na tabela de dimensão.
         """
-        id_column_name = f"id_{table_name.replace('Dim', '').lower()}"
+        id_column_name = f"id_{table_name.replace('dim_', '').lower()}"
 
         full_table_name = sql.SQL("{}.{}").format(
             sql.Identifier(self.schema_name), sql.Identifier(table_name)
@@ -117,7 +117,7 @@ class DBManager:
 
     def get_or_create_tempo_id(self, ano_mes: str) -> int:
         """
-        Obtém ou cria um ID para DimTempo.
+        Obtém ou cria um ID para dim_tempo.
         Ignora trimestre e nome_mes conforme solicitado.
 
         Args:
@@ -131,7 +131,7 @@ class DBManager:
             data_completa = datetime(year, month, 1).date()
 
             return self._get_or_create_id(
-                table_name="DimTempo",
+                table_name="dim_tempo",
                 columns_data={
                     "ano_mes": ano_mes,
                     "ano": year,
@@ -145,32 +145,32 @@ class DBManager:
             raise
 
     def get_or_create_grupo_economico_id(self, nome_grupo: str):
-        """Obtém ou cria um ID para DimGrupoEconomico."""
+        """Obtém ou cria um ID para dim_grupo_economico."""
         return self._get_or_create_id(
-            table_name="DimGrupoEconomico",
+            table_name="dim_grupo_economico",
             columns_data={"nome_grupo_economico": nome_grupo},
             query_columns=["nome_grupo_economico"],
         )
 
     def get_or_create_indicador_id(self, nome_indicador: str):
-        """Obtém ou cria um ID para DimIndicador."""
+        """Obtém ou cria um ID para dim_indicador."""
         return self._get_or_create_id(
-            table_name="DimIndicador",
+            table_name="dim_indicador",
             columns_data={"nome_indicador": nome_indicador},
             query_columns=["nome_indicador"],
         )
 
     def get_or_create_servico_id(self, nome_servico: str, sigla_servico: str):
-        """Obtém ou cria um ID para DimServico."""
+        """Obtém ou cria um ID para dim_servico."""
         return self._get_or_create_id(
-            table_name="DimServico",
+            table_name="dim_servico",
             columns_data={"nome_servico": nome_servico, "sigla_servico": sigla_servico},
             query_columns=["sigla_servico"],
         )
 
     def bulk_insert_facts(self, fact_data_list):
         """
-        Insere múltiplos registros na tabela FactIndicadorDesempenho (sem id_localidade).
+        Insere múltiplos registros na tabela fact_indicador_desempenho (sem id_localidade).
 
         Args:
             fact_data_list (list of tuples): (id_tempo, id_grupo_economico, id_servico,
@@ -181,7 +181,7 @@ class DBManager:
             return
 
         query_str = (
-            f"INSERT INTO {self.schema_name}.FactIndicadorDesempenho "
+            f"INSERT INTO {self.schema_name}.fact_indicador_desempenho "
             "(id_tempo, id_grupo_economico, id_servico, id_indicador, valor) "
             "VALUES %s"
         )
