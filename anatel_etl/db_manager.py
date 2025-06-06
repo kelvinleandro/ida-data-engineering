@@ -134,8 +134,6 @@ class DBManager:
                 table_name="dim_tempo",
                 columns_data={
                     "ano_mes": ano_mes,
-                    "ano": year,
-                    "mes": month,
                     "data_completa": data_completa,
                 },
                 query_columns=["ano_mes"],

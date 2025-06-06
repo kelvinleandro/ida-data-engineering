@@ -6,16 +6,12 @@ COMMENT ON SCHEMA anatel_datamart IS 'Esquema para o Data Mart de Índices de De
 CREATE TABLE IF NOT EXISTS anatel_datamart.dim_tempo (
     id_tempo SERIAL PRIMARY KEY,
     data_completa DATE NOT NULL UNIQUE,
-    ano INTEGER NOT NULL,
-    mes INTEGER NOT NULL,
     ano_mes VARCHAR(7) NOT NULL
 );
 
 COMMENT ON TABLE anatel_datamart.dim_tempo IS 'Dimensão Tempo para análise dos indicadores.';
 COMMENT ON COLUMN anatel_datamart.dim_tempo.id_tempo IS 'Chave primária da dimensão tempo.';
 COMMENT ON COLUMN anatel_datamart.dim_tempo.data_completa IS 'Data completa (primeiro dia do mês).';
-COMMENT ON COLUMN anatel_datamart.dim_tempo.ano IS 'Ano referente ao indicador.';
-COMMENT ON COLUMN anatel_datamart.dim_tempo.mes IS 'Mês referente ao indicador (1-12).';
 COMMENT ON COLUMN anatel_datamart.dim_tempo.ano_mes IS 'Representação textual do ano e mês (ex: 2023-01).';
 
 CREATE TABLE IF NOT EXISTS anatel_datamart.dim_grupo_economico (
