@@ -60,7 +60,9 @@ CREATE TABLE IF NOT EXISTS anatel_datamart.fact_indicador_desempenho (
     CONSTRAINT fk_tempo FOREIGN KEY (id_tempo) REFERENCES anatel_datamart.dim_tempo(id_tempo) ON DELETE RESTRICT,
     CONSTRAINT fk_grupo_economico FOREIGN KEY (id_grupo_economico) REFERENCES anatel_datamart.dim_grupo_economico(id_grupo_economico) ON DELETE RESTRICT,
     CONSTRAINT fk_servico FOREIGN KEY (id_servico) REFERENCES anatel_datamart.dim_servico(id_servico) ON DELETE RESTRICT,
-    CONSTRAINT fk_indicador FOREIGN KEY (id_indicador) REFERENCES anatel_datamart.dim_indicador(id_indicador) ON DELETE RESTRICT
+    CONSTRAINT fk_indicador FOREIGN KEY (id_indicador) REFERENCES anatel_datamart.dim_indicador(id_indicador) ON DELETE RESTRICT,
+
+    CONSTRAINT unique_fato_combinacao UNIQUE (id_tempo, id_grupo_economico, id_servico, id_indicador)
 );
 
 COMMENT ON TABLE anatel_datamart.fact_indicador_desempenho IS 'Tabela de fatos contendo os valores dos indicadores de desempenho.';

@@ -184,6 +184,7 @@ class DBManager:
             f"INSERT INTO {self.schema_name}.fact_indicador_desempenho "
             "(id_tempo, id_grupo_economico, id_servico, id_indicador, valor) "
             "VALUES %s"
+            "ON CONFLICT (id_tempo, id_grupo_economico, id_servico, id_indicador) DO NOTHING"
         )
 
         try:
